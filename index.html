@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight Loop</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollToPlugin.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Navbar -->
+<nav id="navbar">
+    <div class="logo">MIDNIGHT LOOP</div>
+    <ul class="nav-links">
+        <li><a href="#inicio">Sereno</a></li>
+        <li><a href="#equipo">Team</a></li>
+        <li><a href="#contacto">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="inicio">
+    <div class="hero-content">
+        <img src="Assets/Portada_Sereno.jpg" alt="Portada">
+    </div>
+    <div class="scroll-indicator">
+        <div class="scroll-arrow"><h2>↓</h2></div>
+    </div>
+</section>
+
+<!-- Video Section -->
+<section class="video-section" id="video">
+    <button class="project-arrow project-arrow-left" onclick="changeProject(-1)">‹</button>
+
+    <div class="project-wrapper">
+        <div class="project-container" data-layout="left">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/0XczhTgPNa8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-text">
+                <h2>Sereno</h2>
+                <p>Sereno is a narrative time-loop investigation game set in 1940s post-war Madrid, where players alternate between a watchman at night and a mailman during the day. Each loop represents a full day divided into four evolving stages, pushing players to explore the city, gather Items, develop Ideas, and build Instincts to uncover clues and reconstruct the truth behind a murder tied to both characters' pasts.</p>
+            </div>
+        </div>
+
+        <div class="project-info">
+            <a href="https://dreamy-alchemist.itch.io/sereno" id="project-link" target="_blank" class="project-website">DEMO COMING SOON →</a>
+            <div class="project-dots" id="project-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+
+    <button class="project-arrow project-arrow-right" onclick="changeProject(1)">›</button>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery" id="galeria">
+    <h2>Galería</h2>
+    <div class="gallery-slider">
+        <div class="gallery-track" id="galleryTrack">
+            <div class="gallery-item">Imagen 1</div>
+            <div class="gallery-item">Imagen 2</div>
+            <div class="gallery-item">Imagen 3</div>
+            <div class="gallery-item">Imagen 4</div>
+        </div>
+        <div class="gallery-nav">
+            <button class="gallery-btn" onclick="moveGallery(-1)">‹</button>
+            <button class="gallery-btn" onclick="moveGallery(1)">›</button>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter" id="newsletter">
+    <h2>Don't miss a beat</h2>
+    <div class="social-icons" id="newsletter-social">
+        <a href="https://itch.io/" target="_blank">
+            <img src="https://img.icons8.com/ios11/600/FA5252/itch-io.png" alt="itch.io">
+        </a>
+        <a href="https://bsky.app/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bluesky_Logo.svg/960px-Bluesky_Logo.svg.png" alt="Bluesky">
+        </a>
+        <a href="https://youtube.com" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+        </a>
+        <a href="https://instagram.com" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+        </a>
+        <a href="https://reddit.com/" target="_blank">
+            <img src="https://vectorseek.com/wp-content/uploads/2023/12/Reddit-Icon-New-2023-Logo-Vector.svg-.png" alt="Reddit">
+        </a>
+        <a href="https://es.linkedin.com/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png" alt="LinkedIn">
+        </a>
+    </div>
+    <p>Sign up to our monthly newlestter for regular insights
+        on the development, and future perks.</p>
+    <form class="newsletter-form" onsubmit="return handleNewsletter(event)">
+        <input type="email" name="email" id="newsletter-email" placeholder="Your email here.... (We promise not to spam)" required>
+        <button type="submit">Register</button>
+    </form>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="equipo">
+    <h2>WHO IS BEHIND ALL THESE?</h2>
+    <h3 class="team-desc">We are Midnight Loop, a remote Spanish video game studio focused on
+        creating narrative experiences, where the player acts and the world reacts.</h3>
+    <h3 class="team-desc">Forged in chaos, we set our sights on creating stories that linger after the
+        screen fades to black. Building hand-crafted worlds designed to breath, places
+        that invite to belong. From the first spark of the idea to its final refined form,
+        we chase emotions and resonance.</h3>
+    <div class="team-grid">
+        <div class="team-member">
+            <div class="team-member-img">👤</div>
+            <h3>Martín Pérez</h3>
+            <p>Producer & Marketing</p>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img">👤</div>
+            <h3>Germán Gabari Llorens</h3>
+            <p>Designer & Assist. Producer</p>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img">👤</div>
+            <h3>Francisco Blümel</h3>
+            <p>Designer</p>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img"><img src="Assets/Team/V.jpeg" alt="V"></div>
+            <h3>Víctor Herrero</h3>
+            <p>MASTER PROGRAMMER, GOD OF GODS</p>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img">👤</div>
+            <h3>Alejandro Menéndez</h3>
+            <p>Programmer</p>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img">👤</div>
+            <h3>Carlos González</h3>
+            <p>Technical Artist</p>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img">👤</div>
+            <h3>Beatriz Santos</h3>
+            <p>Artist</p>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img">👤</div>
+            <h3>Yago López</h3>
+            <p>Artist</p>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img">👤</div>
+            <h3>Nerea Herrero</h3>
+            <p>Compositor</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contacto">
+    <h2>SEND US A MESSAGE</h2>
+    <div class="contact-content">
+        <form class="contact-form" onsubmit="return handleContact(event)">
+            <input type="email" id="contact-form-email" placeholder="Email" required>
+            <input type="text" id="contact-form-name" placeholder="Name" required>
+            <input type="text" id="contact-form-subject" placeholder="Subject" required>
+            <textarea id="contact-form-content" placeholder="Content" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <div class="contact-text">
+            <p>Do you have any suggestions, ideas or just want to get in contact?</p>
+            <p>Send us a quick message and our team will answer you as soon as possible in the most polite way that we know.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <p class="footer-left">Follow us online!</p>
+
+        <div class="footer-center">
+            <div class="social-icons">
+                <a href="https://itch.io/" target="_blank">
+                    <img src="https://img.icons8.com/ios11/600/FA5252/itch-io.png" alt="itch.io">
+                </a>
+                <a href="https://bsky.app/" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bluesky_Logo.svg/960px-Bluesky_Logo.svg.png" alt="Bluesky">
+                </a>
+                <a href="https://youtube.com" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+                </a>
+                <a href="https://instagram.com" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                </a>
+                <a href="https://reddit.com/" target="_blank">
+                    <img src="https://vectorseek.com/wp-content/uploads/2023/12/Reddit-Icon-New-2023-Logo-Vector.svg-.png" alt="Reddit">
+                </a>
+                <a href="https://es.linkedin.com/" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png" alt="LinkedIn">
+                </a>
+            </div>
+            <p class="social-text">© 2026 Midnight Loop.</p>
+        </div>
+
+        <p class="footer-right">Join the midnight mailing list</p>
+    </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
