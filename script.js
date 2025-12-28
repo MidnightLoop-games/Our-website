@@ -267,33 +267,51 @@ scrollIndicator.addEventListener('click', () => {
 // Parallax effect on hero image
 const heroSection = document.querySelector('.hero');
 const heroImage = document.querySelector('.hero-content img');
+let isParallaxEnabled = window.innerWidth > 768;
 
-heroSection.addEventListener('mousemove', (e) => {
+function resetHeroPosition(){
+    gsap.set(heroImage, { x: 0, y: 0 });
+}
+
+function handleParallax(e){
+    if(!isParallaxEnabled) return;
+    
     const { clientX, clientY } = e;
     const { offsetWidth, offsetHeight } = heroSection;
-
-    // Calculate mouse position as percentage
-    const xPos = (clientX / offsetWidth - 0.5) * 2; // -1 to 1
-    const yPos = (clientY / offsetHeight - 0.5) * 2; // -1 to 1
-
-    // Apply parallax movement (subtle effect)
-    const moveX = xPos * 20; // Max 20px movement
+    
+    const xPos = (clientX / offsetWidth - 0.5) * 2;
+    const yPos = (clientY / offsetHeight - 0.5) * 2;
+    
+    const moveX = xPos * 20;
     const moveY = yPos * 20;
-
+    
     gsap.to(heroImage, {
         x: moveX,
         y: moveY,
         duration: 0.5,
         ease: 'power2.out'
     });
-});
+}
 
-// Reset position when mouse leaves
-heroSection.addEventListener('mouseleave', () => {
+function handleParallaxLeave(){
+    if(!isParallaxEnabled) return;
+    
     gsap.to(heroImage, {
-        x: 0,
+        x: 0, 
         y: 0,
         duration: 0.5,
         ease: 'power2.out'
     });
+}
+
+heroSection.addEventListener('mousemove', handleParallax);
+heroSection.addEventListener('mouseleave', handleParallaxLeave);
+
+window.addEventListener('resize', () => {
+    const wasEnabled = isParallaxEnabled;
+    isParallaxEnabled = window.innerWidth > 768;
+    
+    if(wasEnabled && !isParallaxEnabled){
+        resetHeroPosition();
+    }
 });
