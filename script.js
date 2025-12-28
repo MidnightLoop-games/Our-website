@@ -42,14 +42,6 @@ const projects = [
         layout: "left",
         website: "https://dreamy-alchemist.itch.io/sereno",
         linkText: "DEMO COMING SOON →"
-    },
-    {
-        title: "HAS SIDO RICKROLLEADO",
-        video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        description: "Jeje ejemplo.",
-        layout: "right",
-        website: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        linkText: "Picaste wei →"
     }
 ];
 
@@ -199,11 +191,40 @@ function handleNewsletter(e) {
     return false;
 }
 
-/// TODO: Falta por hacer esta funcionalidad a la hora de mandar el correo en la sección de contacto
 function handleContact(e) {
     e.preventDefault();
-    alert('¡Mensaje enviado! Te contactaremos pronto. (Mentira)');
-    e.target.reset();
+
+    const email = document.getElementById('contact-form-email').value;
+    const name = document.getElementById('contact-form-name').value;
+    const subject = document.getElementById('contact-form-subject').value;
+    const content = document.getElementById('contact-form-content').value;
+
+    // Deshabilitar el botón mientras se envía
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    const templateParams = {
+        from_email: email,
+        from_name: name,
+        subject: subject,
+        message: content
+    };
+
+    emailjs.send('service_6436xme', 'template_qtsvvtr', templateParams)
+        .then(() => {
+            alert('¡Mensaje enviado! Te contactaremos pronto.\n- Midnight Loop Team <3');
+            e.target.reset();
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }, (error) => {
+            alert('Error al enviar el mensaje. Por favor, intenta de nuevo más tarde.');
+            console.error('Error:', error);
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
+
     return false;
 }
 

@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Midnight Loop</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/gsap@3/dist/ScrollToPlugin.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("nNVHtLMNlHglwUfgV");
+        })();
+    </script>
 </head>
 <body>
 <!-- Navbar -->
@@ -32,7 +38,7 @@
 
 <!-- Video Section -->
 <section class="video-section" id="video">
-    <button class="project-arrow project-arrow-left" onclick="changeProject(-1)">‹</button>
+<!--    <button class="project-arrow project-arrow-left" onclick="changeProject(-1)">‹</button>-->
 
     <div class="project-wrapper">
         <div class="project-container" data-layout="left">
@@ -47,14 +53,14 @@
 
         <div class="project-info">
             <a href="https://dreamy-alchemist.itch.io/sereno" id="project-link" target="_blank" class="project-website">DEMO COMING SOON →</a>
-            <div class="project-dots" id="project-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-            </div>
+<!--            <div class="project-dots" id="project-dots">-->
+<!--                <span class="dot active"></span>-->
+<!--                <span class="dot"></span>-->
+<!--            </div>-->
         </div>
     </div>
 
-    <button class="project-arrow project-arrow-right" onclick="changeProject(1)">›</button>
+<!--    <button class="project-arrow project-arrow-right" onclick="changeProject(1)">›</button>-->
 </section>
 
 <!-- Gallery Section -->
@@ -107,7 +113,7 @@
 
 <!-- Team Section -->
 <section class="team" id="equipo">
-    <h2>WHO IS BEHIND ALL THESE?</h2>
+    <h2>WHO IS BEHIND ALL THIS?</h2>
     <h3 class="team-desc">We are Midnight Loop, a remote Spanish video game studio focused on
         creating narrative experiences, where the player acts and the world reacts.</h3>
     <h3 class="team-desc">Forged in chaos, we set our sights on creating stories that linger after the
@@ -116,12 +122,12 @@
         we chase emotions and resonance.</h3>
     <div class="team-grid">
         <div class="team-member">
-            <div class="team-member-img">👤</div>
+            <div class="team-member-img"><img src="Assets/Team/Martin.jfif" alt="Martín"></div>
             <h3>Martín Pérez</h3>
             <p>Producer & Marketing</p>
         </div>
         <div class="team-member">
-            <div class="team-member-img">👤</div>
+            <div class="team-member-img"><img src="Assets/Team/German.png" alt="Germán"></div>
             <h3>Germán Gabari Llorens</h3>
             <p>Designer & Assist. Producer</p>
         </div>
@@ -133,7 +139,7 @@
         <div class="team-member">
             <div class="team-member-img"><img src="Assets/Team/V.jpeg" alt="V"></div>
             <h3>Víctor Herrero</h3>
-            <p>MASTER PROGRAMMER, GOD OF GODS</p>
+            <p>Programmer</p>
         </div>
         <div class="team-member">
             <div class="team-member-img">👤</div>
@@ -141,7 +147,7 @@
             <p>Programmer</p>
         </div>
         <div class="team-member">
-            <div class="team-member-img">👤</div>
+            <div class="team-member-img"><img src="Assets/Team/Kalios.jpeg" alt="Kalios"></div>
             <h3>Carlos González</h3>
             <p>Technical Artist</p>
         </div>
@@ -151,14 +157,14 @@
             <p>Artist</p>
         </div>
         <div class="team-member">
-            <div class="team-member-img">👤</div>
+            <div class="team-member-img"><img src="Assets/Team/Yago.jpg" alt="Yago"></div>
             <h3>Yago López</h3>
             <p>Artist</p>
         </div>
         <div class="team-member">
-            <div class="team-member-img">👤</div>
-            <h3>Nerea Herrero</h3>
-            <p>Compositor</p>
+            <div class="team-member-img"><img src="Assets/Team/Nerea.JPG" alt="Nerea"></div>
+            <h3>Nerea Herreros</h3>
+            <p>Composer & SFX designer</p>
         </div>
     </div>
 </section>
@@ -184,7 +190,7 @@
 <!-- Footer -->
 <footer>
     <div class="footer-content">
-        <p class="footer-left">Follow us online!</p>
+        <p class="footer-left"><strong>Follow us online!</strong></p>
 
         <div class="footer-center">
             <div class="social-icons">
@@ -210,7 +216,7 @@
             <p class="social-text">© 2026 Midnight Loop.</p>
         </div>
 
-        <p class="footer-right">Join the midnight mailing list</p>
+        <p class="footer-right"><a href="#newsletter"><strong>Join the midnight mailing list</strong></a></p>
     </div>
 </footer>
 <script src="script.js"></script>
