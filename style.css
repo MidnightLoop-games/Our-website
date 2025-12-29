@@ -288,6 +288,73 @@ nav {
     color: #a0aec0;
 }
 
+/* ------------------------- Gallery Section ------------------------- */
+.gallery {
+    padding: 100px 60px;
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+}
+
+.gallery h2 {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.gallery-slider {
+    position: relative;
+    max-width: 1000px;
+    height: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.gallery-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%;
+}
+
+.gallery-item {
+    min-width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: #fff;
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    transform: translateY(-50%);
+}
+
+.gallery-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.gallery-btn:hover {
+    background: rgba(255,255,255,0.4);
+    transform: scale(1.1);
+}
+
 /* ------------------------- Newsletter Section ------------------------- */
 .newsletter {
     padding: 100px 50px;
@@ -388,13 +455,13 @@ nav {
 
 @media (min-width: 1200px) {
     .team-grid {
-        gap: 80px;
+        gap: 50px;
     }
 }
 
 @media (min-width: 1400px) {
     .team-grid {
-        gap: 150px;
+        gap: 80px;
     }
 }
 
@@ -440,73 +507,6 @@ nav {
 
 .team-member p {
     color: #a0aec0;
-}
-
-/* ------------------------- Gallery Section ------------------------- */
-.gallery {
-    padding: 100px 50px;
-    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
-}
-
-.gallery h2 {
-    font-size: 48px;
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.gallery-slider {
-    position: relative;
-    max-width: 1200px;
-    height: 600px;
-    margin: 0 auto;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-}
-
-.gallery-track {
-    display: flex;
-    transition: transform 0.5s ease;
-    height: 100%;
-}
-
-.gallery-item {
-    min-width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: #fff;
-}
-
-.gallery-nav {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-    transform: translateY(-50%);
-}
-
-.gallery-btn {
-    background: rgba(255,255,255,0.2);
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.3s;
-    backdrop-filter: blur(10px);
-}
-
-.gallery-btn:hover {
-    background: rgba(255,255,255,0.4);
-    transform: scale(1.1);
 }
 
 /* ------------------------- Contact Section ------------------------- */
@@ -802,7 +802,7 @@ footer {
 
     /* Gallery */
     .gallery {
-        padding: 60px 20px;
+        padding: 60px 30px;
     }
 
     .gallery h2 {
