@@ -264,54 +264,54 @@ scrollIndicator.addEventListener('click', () => {
     });
 });
 
-// Parallax effect on hero image
-const heroSection = document.querySelector('.hero');
-const heroImage = document.querySelector('.hero-content img');
-let isParallaxEnabled = window.innerWidth > 768;
-
-function resetHeroPosition(){
-    gsap.set(heroImage, { x: 0, y: 0 });
-}
-
-function handleParallax(e){
-    if(!isParallaxEnabled) return;
-    
-    const { clientX, clientY } = e;
-    const { offsetWidth, offsetHeight } = heroSection;
-    
-    const xPos = (clientX / offsetWidth - 0.5) * 2;
-    const yPos = (clientY / offsetHeight - 0.5) * 2;
-    
-    const moveX = xPos * 20;
-    const moveY = yPos * 20;
-    
-    gsap.to(heroImage, {
-        x: moveX,
-        y: moveY,
-        duration: 0.5,
-        ease: 'power2.out'
-    });
-}
-
-function handleParallaxLeave(){
-    if(!isParallaxEnabled) return;
-    
-    gsap.to(heroImage, {
-        x: 0, 
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out'
-    });
-}
-
-heroSection.addEventListener('mousemove', handleParallax);
-heroSection.addEventListener('mouseleave', handleParallaxLeave);
-
-window.addEventListener('resize', () => {
-    const wasEnabled = isParallaxEnabled;
-    isParallaxEnabled = window.innerWidth > 768;
-    
-    if(wasEnabled && !isParallaxEnabled){
-        resetHeroPosition();
-    }
-});
+// // Parallax effect on hero image
+// const heroSection = document.querySelector('.hero');
+// const heroImage = document.querySelector('.hero-content img');
+// let isParallaxEnabled = window.innerWidth > 768;
+//
+// function resetHeroPosition(){
+//     gsap.set(heroImage, { x: 0, y: 0 });
+// }
+//
+// function handleParallax(e){
+//     if(!isParallaxEnabled) return;
+//    
+//     const { clientX, clientY } = e;
+//     const { offsetWidth, offsetHeight } = heroSection;
+//    
+//     const xPos = (clientX / offsetWidth - 0.5) * 2;
+//     const yPos = (clientY / offsetHeight - 0.5) * 2;
+//    
+//     const moveX = xPos * 20;
+//     const moveY = yPos * 20;
+//    
+//     gsap.to(heroImage, {
+//         x: moveX,
+//         y: moveY,
+//         duration: 0.5,
+//         ease: 'power2.out'
+//     });
+// }
+//
+// function handleParallaxLeave(){
+//     if(!isParallaxEnabled) return;
+//    
+//     gsap.to(heroImage, {
+//         x: 0, 
+//         y: 0,
+//         duration: 0.5,
+//         ease: 'power2.out'
+//     });
+// }
+//
+// heroSection.addEventListener('mousemove', handleParallax);
+// heroSection.addEventListener('mouseleave', handleParallaxLeave);
+//
+// window.addEventListener('resize', () => {
+//     const wasEnabled = isParallaxEnabled;
+//     isParallaxEnabled = window.innerWidth > 768;
+//    
+//     if(wasEnabled && !isParallaxEnabled){
+//         resetHeroPosition();
+//     }
+// });
