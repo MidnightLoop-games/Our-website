@@ -21,7 +21,14 @@
 <nav id="navbar">
     <div class="logo">MIDNIGHT LOOP</div>
     <ul class="nav-links">
-        <li><a href="#inicio">Sereno</a></li>
+        <li><a href="#inicio">Home</a></li>
+        <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-toggle">Games <span class="dropdown-arrow">&#9662;</span></button>
+            <ul class="nav-dropdown-menu">
+                <li><a href="games/tears-for-clavel.html">Tears For Clavel</a></li>
+                <li><a href="games/sereno.html">Sereno</a></li>
+            </ul>
+        </li>
         <li><a href="#equipo">Team</a></li>
         <li><a href="#contacto">Contact</a></li>
     </ul>
@@ -30,7 +37,7 @@
 <!-- Hero Section -->
 <section class="hero" id="inicio">
     <div class="hero-content">
-        <img src="Assets/Portada_Sereno.jpg" alt="Portada">
+        <img src="Assets/keyArt_TearsForClavel.png" alt="Portada">
     </div>
     <div class="scroll-indicator">
         <div class="scroll-arrow"><h2>↓</h2></div>
@@ -39,32 +46,34 @@
 
 <!-- Video Section -->
 <section class="video-section" id="video">
-<!--    <button class="project-arrow project-arrow-left" onclick="changeProject(-1)">‹</button>-->
+    <button class="project-arrow project-arrow-left" onclick="changeProject(-1)">‹</button>
 
     <div class="project-wrapper">
         <div class="project-container" data-layout="left">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/0XczhTgPNa8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="project-media project-media-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <video class="project-media project-media-local-video" controls playsinline></video>
+                <img class="project-media project-media-image" alt="">
             </div>
             <div class="video-text">
-                <h2>Sereno</h2>
-                <p>Sereno is a narrative time-loop investigation game set in 1940s post-war Madrid, where players alternate between a watchman at night and a mailman during the day. Each loop represents a full day divided into four evolving stages, pushing players to explore the city, gather Items, develop Ideas, and build Instincts to uncover clues and reconstruct the truth behind a murder tied to both characters' pasts.</p>
+                <h2>Tears for Clavel</h2>
+                <p>Tears for Clavel is a singleplayer narrative murder mystery game where you play the same story from two different perspectives. As a night watchman during the dark and as a young mailman during the day, with a murder that ties everything together towards the end. It's set in a fictional 1940s post civil war Spain, with handrawn stylized art.</p>
             </div>
         </div>
 
         <div class="project-info">
-            <a href="https://dreamy-alchemist.itch.io/sereno" id="project-link" target="_blank" class="project-website">DEMO COMING SOON →</a>
-<!--            <div class="project-dots" id="project-dots">-->
-<!--                <span class="dot active"></span>-->
-<!--                <span class="dot"></span>-->
-<!--            </div>-->
+            <a href="#newsletter" id="project-link" target="_blank" class="project-website">[WORK IN PROGRESS]</a>
+            <div class="project-dots" id="project-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+            </div>
         </div>
     </div>
 
-<!--    <button class="project-arrow project-arrow-right" onclick="changeProject(1)">›</button>-->
+    <button class="project-arrow project-arrow-right" onclick="changeProject(1)">›</button>
 </section>
 
-<!-- Gallery Section -->
+<!-- Gallery Section (disabled)
 <section class="gallery" id="galeria">
     <h2>Gallery</h2>
     <div class="gallery-slider">
@@ -80,6 +89,9 @@
         </div>
     </div>
 </section>
+-->
+
+
 
 <!-- Newsletter Section -->
 <section class="newsletter" id="newsletter">
@@ -143,6 +155,11 @@
             <p>Programmer</p>
         </div>
         <div class="team-member">
+            <div class="team-member-img"><img src="Assets/Team/Julia.jpg" alt="Julia"></div>
+            <h3>Julia Fluiters</h3>
+            <p>Programmer</p>
+        </div>
+        <div class="team-member">
             <div class="team-member-img"><img src="Assets/Team/Alejandro.jpg" alt="Alejandro"></div>
             <h3>Alejandro Menéndez</h3>
             <p>Programmer</p>
@@ -160,6 +177,11 @@
         <div class="team-member">
             <div class="team-member-img"><img src="Assets/Team/Yago.jpg" alt="Yago"></div>
             <h3>Yago López</h3>
+            <p>Artist</p>
+        </div>
+        <div class="team-member">
+            <div class="team-member-img"><img src="" alt=""></div>
+            <h3>Cris</h3>
             <p>Artist</p>
         </div>
         <div class="team-member">

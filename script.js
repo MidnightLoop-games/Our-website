@@ -1,6 +1,69 @@
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
 
+// Navbar "Games" dropdown
+const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+
+    let closeTimeout;
+
+    const openDropdown = () => {
+        clearTimeout(closeTimeout);
+        document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+            if (d !== dropdown) d.classList.remove('open');
+        });
+        dropdown.classList.add('open');
+    };
+
+    const scheduleClose = () => {
+        clearTimeout(closeTimeout);
+        closeTimeout = setTimeout(() => dropdown.classList.remove('open'), 200);
+    };
+
+    // Open on hover for mouse/trackpad users
+    if (supportsHover) {
+        dropdown.addEventListener('mouseenter', openDropdown);
+        dropdown.addEventListener('mouseleave', scheduleClose);
+    }
+
+    // Click still works as a fallback (touch devices, keyboard/Enter activation)
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = dropdown.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+        if (!isOpen) dropdown.classList.add('open');
+    });
+
+    // Selection feedback: highlight the chosen game briefly before navigating
+    dropdown.querySelectorAll('.nav-dropdown-menu a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (link.dataset.navigating) return;
+            e.preventDefault();
+            link.dataset.navigating = 'true';
+            link.classList.add('selecting');
+            const destination = link.getAttribute('href');
+            setTimeout(() => {
+                window.location.href = destination;
+            }, 220);
+        });
+    });
+});
+
+document.addEventListener('click', (e) => {
+    document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+        if (!d.contains(e.target)) d.classList.remove('open');
+    });
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+    }
+});
+
 // Navbar animation
 gsap.from('.logo', {
     opacity: 0,
@@ -34,16 +97,63 @@ gsap.utils.toArray('section').forEach(section => {
 });
 
 // Project switching on carrousel functionality
+//
+// Each project picks ONE media source via `mediaType`:
+//   - "video"        -> YouTube embed, read from `video` (embed URL)
+//   - "local-video"  -> self-hosted <video>, read from `videoFile` (path to .mp4/.webm)
+//   - "image"        -> static <img>, read from `image` (path to the image)
+// Only the fields relevant to the chosen mediaType need to be filled in.
 const projects = [
     {
-        title: "Sereno",
-        video: "https://www.youtube.com/embed/0XczhTgPNa8",
-        description: "Sereno is a narrative time-loop investigation game set in 1940s post-war Madrid, where players alternate between a watchman at night and a mailman during the day. Each loop represents a full day divided into four evolving stages, pushing players to explore the city, gather Items, develop Ideas, and build Instincts to uncover clues and reconstruct the truth behind a murder tied to both characters' pasts.",
+        title: "Tears for Clavel",
+        mediaType: "image",
+        video: "",
+        videoFile: "",
+        image: "/Assets/keyArt_TearsForClavel.png",
+        description: "Tears for Clavel is a singleplayer narrative murder mystery game where you play the same story from two different perspectives. As a night watchman during the dark and as a young mailman during the day, with a murder that ties everything together towards the end. It's set in a fictional 1940s post civil war Spain, with handrawn stylized art.",
         layout: "left",
+        website: "#newsletter",
+        linkText: "[WORK IN PROGRESS]"
+    },
+    {
+        title: "Sereno",
+        mediaType: "video",
+        video: "https://www.youtube.com/embed/0XczhTgPNa8",
+        videoFile: "",
+        image: "",
+        description: "Sereno is a narrative time-loop investigation game set in 1940s post-war Madrid, where players alternate between a watchman at night and a mailman during the day. Each loop represents a full day divided into four evolving stages, pushing players to explore the city, gather Items, develop Ideas, and build Instincts to uncover clues and reconstruct the truth behind a murder tied to both characters' pasts.",
+        layout: "right",
         website: "https://dreamy-alchemist.itch.io/sereno",
-        linkText: "DEMO COMING SOON →"
+        linkText: "ENJOY IT NOW →"
     }
 ];
+
+// Shows the right media element (iframe / local video / image) for a project
+// inside its .video-container, hiding and resetting the other two so nothing
+// keeps loading or playing silently in the background.
+function setProjectMedia(container, project) {
+    const iframeEl = container.querySelector('.project-media-video');
+    const videoEl = container.querySelector('.project-media-local-video');
+    const imgEl = container.querySelector('.project-media-image');
+
+    videoEl.pause();
+    iframeEl.src = '';
+    videoEl.removeAttribute('src');
+    imgEl.removeAttribute('src');
+    [iframeEl, videoEl, imgEl].forEach(el => el.classList.remove('active'));
+
+    if (project.mediaType === 'local-video') {
+        videoEl.src = project.videoFile;
+        videoEl.classList.add('active');
+    } else if (project.mediaType === 'image') {
+        imgEl.src = project.image;
+        imgEl.alt = project.title;
+        imgEl.classList.add('active');
+    } else {
+        iframeEl.src = project.video;
+        iframeEl.classList.add('active');
+    }
+}
 
 let currentProject = 0;
 let isAnimatingProject = false;
@@ -79,7 +189,7 @@ function animateProjectChange(direction) {
         onComplete: () => {
             // Update content
             container.setAttribute('data-layout', project.layout);
-            container.querySelector('iframe').src = project.video;
+            setProjectMedia(container, project);
             container.querySelector('h2').textContent = project.title;
             container.querySelector('p').textContent = project.description;
 
@@ -116,7 +226,11 @@ function changeProject(direction) {
     animateProjectChange(direction);
 }
 
-// Initialize dots
+// Initialize the first project's media and dots
+const initialProjectContainer = document.querySelector('.project-container');
+if (initialProjectContainer) {
+    setProjectMedia(initialProjectContainer, projects[currentProject]);
+}
 updateProjectDots();
 
 // Gallery functionality
@@ -152,18 +266,20 @@ function stopGalleryAutoSlide() {
 
 // Event listeners to pause on hover
 const gallerySlider = document.querySelector('.gallery-slider');
-gallerySlider.addEventListener('mouseenter', () => {
-    isHoveringGallery = true;
-    stopGalleryAutoSlide();
-});
+if (gallerySlider) {
+    gallerySlider.addEventListener('mouseenter', () => {
+        isHoveringGallery = true;
+        stopGalleryAutoSlide();
+    });
 
-gallerySlider.addEventListener('mouseleave', () => {
-    isHoveringGallery = false;
+    gallerySlider.addEventListener('mouseleave', () => {
+        isHoveringGallery = false;
+        startGalleryAutoSlide();
+    });
+
+    // Initiate auto-slide
     startGalleryAutoSlide();
-});
-
-// Initiate auto-slide
-startGalleryAutoSlide();
+}
 
 // Form handlers
 function handleNewsletter(e) {
@@ -229,40 +345,51 @@ function handleContact(e) {
 }
 
 // Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+// Delegated on document and re-checked at click time (instead of binding once
+// on load) so links whose href changes dynamically — like #project-link in the
+// carousel, which swaps between an in-page anchor and an external URL — always
+// get the correct behaviour: smooth-scroll for "#..." targets, normal
+// navigation for everything else (external sites, other pages, etc.).
+document.addEventListener('click', function (e) {
+    const anchor = e.target.closest('a[href]');
+    if (!anchor) return;
+
+    const href = anchor.getAttribute('href');
+    if (!href || !href.startsWith('#') || href === '#') return;
+
+    const target = document.querySelector(href);
+    if (target) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            gsap.to(window, {
-                duration: 1,
-                scrollTo: target,
-                ease: 'power3.inOut'
-            });
-        }
-    });
+        gsap.to(window, {
+            duration: 1,
+            scrollTo: target,
+            ease: 'power3.inOut'
+        });
+    }
 });
 
 // Scroll indicator functionality
 const scrollIndicator = document.querySelector('.scroll-indicator');
 
-// Hide indicator on scroll
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        scrollIndicator.classList.add('hidden');
-    } else {
-        scrollIndicator.classList.remove('hidden');
-    }
-});
-
-// Smooth scroll when clicking the arrow
-scrollIndicator.addEventListener('click', () => {
-    gsap.to(window, {
-        duration: 1,
-        scrollTo: '#video',
-        ease: 'power3.inOut'
+if (scrollIndicator) {
+    // Hide indicator on scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            scrollIndicator.classList.add('hidden');
+        } else {
+            scrollIndicator.classList.remove('hidden');
+        }
     });
-});
+
+    // Smooth scroll when clicking the arrow
+    scrollIndicator.addEventListener('click', () => {
+        gsap.to(window, {
+            duration: 1,
+            scrollTo: scrollIndicator.dataset.target || '#video',
+            ease: 'power3.inOut'
+        });
+    });
+}
 
 // // Parallax effect on hero image
 // const heroSection = document.querySelector('.hero');

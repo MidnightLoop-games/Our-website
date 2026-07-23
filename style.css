@@ -68,6 +68,137 @@ nav {
     width: 100%;
 }
 
+/* ------------------------- Navbar Dropdown (Games) ------------------------- */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 0;
+}
+
+.nav-dropdown-toggle:hover {
+    color: #667eea;
+}
+
+.dropdown-arrow {
+    font-size: 13px;
+    transition: transform 0.3s;
+    display: inline-block;
+}
+
+.nav-dropdown.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 20px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: rgba(10, 14, 39, 0.98);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 14px;
+    padding: 10px;
+    min-width: 220px;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    z-index: 1001;
+}
+
+.nav-dropdown.open .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-menu li + li {
+    margin-top: 4px;
+}
+
+.nav-dropdown-menu a {
+    display: block;
+    padding: 12px 16px 12px 20px;
+    border-radius: 9px;
+    font-size: 16px;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: background 0.3s ease, color 0.3s ease, padding-left 0.3s ease,
+                opacity 0.3s ease, transform 0.3s ease;
+}
+
+.nav-dropdown.open .nav-dropdown-menu li:nth-child(1) a {
+    transition-delay: 0.05s;
+}
+
+.nav-dropdown.open .nav-dropdown-menu li:nth-child(2) a {
+    transition-delay: 0.12s;
+}
+
+.nav-dropdown.open .nav-dropdown-menu a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-dropdown-menu a::after {
+    display: none;
+}
+
+.nav-dropdown-menu a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 3px;
+    height: 60%;
+    border-radius: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: translateY(-50%) scaleY(0);
+    transition: transform 0.25s ease;
+}
+
+.nav-dropdown-menu a:hover,
+.nav-dropdown-menu a:focus-visible {
+    background: rgba(102, 126, 234, 0.15);
+    color: #667eea;
+    padding-left: 26px;
+}
+
+.nav-dropdown-menu a:hover::before,
+.nav-dropdown-menu a:focus-visible::before {
+    transform: translateY(-50%) scaleY(1);
+}
+
+/* Feedback animation when an option is picked, right before navigating */
+.nav-dropdown-menu a.selecting {
+    background: rgba(102, 126, 234, 0.35);
+    color: #fff;
+    padding-left: 26px;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+.nav-dropdown-menu a.selecting::before {
+    transform: translateY(-50%) scaleY(1);
+}
+
 /* ------------------------- Hero Section ------------------------- */
 .hero {
     height: 100vh;
@@ -87,7 +218,7 @@ nav {
 .hero-content img {
     width: 110%;
     height: 110%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
     position: absolute;
     top: 50%;
@@ -268,6 +399,25 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+/* Project media: the carousel can show a YouTube embed, a self-hosted video
+   or a static image inside the same 16:9 box — only the one matching the
+   current project's mediaType gets the "active" class and becomes visible. */
+.project-media {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    object-fit: cover;
+    background: #000;
+}
+
+.project-media.active {
+    display: block;
 }
 
 .video-text {
@@ -871,4 +1021,319 @@ footer {
         flex-direction: column;
         gap: 20px;
     }
+
+    /* Navbar dropdown on mobile */
+    .nav-dropdown-menu {
+        position: static;
+        transform: none;
+        min-width: 0;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        max-height: 0;
+        padding: 0;
+        overflow: hidden;
+        border: none;
+        box-shadow: none;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+        max-height: 300px;
+        padding: 10px;
+        border: 1px solid rgba(102, 126, 234, 0.3);
+        transform: none;
+    }
+
+    /* Game page hero on mobile */
+    .game-hero {
+        height: 70vh;
+        min-height: 420px;
+    }
+
+    .game-hero-content h1 {
+        font-size: 36px;
+    }
+
+    .game-status-badge {
+        font-size: 12px;
+    }
+
+    .game-tagline {
+        font-size: 16px;
+    }
+
+    .game-cta-group {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .game-cta-group a,
+    .game-cta-group span {
+        width: 100%;
+        text-align: center;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-back-link {
+        padding: 30px 20px 0;
+    }
+}
+
+/* ------------------------- Game Page (Games dropdown pages) ------------------------- */
+.game-back-link {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 130px 50px 0;
+}
+
+.game-back-link a {
+    color: #a0aec0;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.game-back-link a:hover {
+    color: #667eea;
+}
+
+.game-hero {
+    height: 90vh;
+    min-height: 500px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.game-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.game-hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,14,39,0.3) 0%, rgba(10,14,39,0.75) 65%, #0a0e27 100%);
+}
+
+.game-hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 0 50px 70px;
+    max-width: 900px;
+}
+
+.game-status-badge {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 50px;
+    background: rgba(102, 126, 234, 0.2);
+    border: 1px solid #667eea;
+    color: #a0b4ff;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.game-status-badge.development{
+    background: rgb(255, 245, 0, 0.2);
+}
+
+.game-status-badge.cancelled{
+    background: rgb(205, 44, 44, 0.2);
+}
+
+.game-status-badge.finished{
+    background: rgb(71 230 21 / 0.2);
+}
+
+.game-hero-content h1 {
+    font-size: 64px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.game-tagline {
+    font-size: 20px;
+    color: #dfe3f2;
+    max-width: 650px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.game-cta-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: inline-block;
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.btn-secondary:hover {
+    border-color: #667eea;
+    color: #667eea;
+    transform: translateY(-3px);
+}
+
+.game-about {
+    padding: 100px 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.game-about h2 {
+    font-size: 42px;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.game-about p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #a0aec0;
+}
+
+.game-features {
+    padding: 40px 50px 100px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid transparent;
+    border-radius: 15px;
+    padding: 35px 30px;
+    transition: all 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    border-color: #667eea;
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+}
+
+.feature-card .feature-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.feature-card p {
+    color: #a0aec0;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.game-trailer-section {
+    padding: 40px 50px 100px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.game-trailer-section h2,
+.game-gallery-section h2 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.game-gallery-section {
+    padding: 40px 60px 100px;
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+}
+
+.game-gallery-placeholder-note {
+    text-align: center;
+    color: #667eea;
+    font-size: 14px;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.game-final-cta {
+    padding: 100px 50px;
+    text-align: center;
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+}
+
+.game-final-cta h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.game-final-cta p {
+    color: #a0aec0;
+    font-size: 17px;
+    margin-bottom: 35px;
+}
+
+.editable-note {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 14px;
+    border-radius: 50px;
+    background: rgba(255, 204, 0, 0.12);
+    border: 1px solid rgba(255, 204, 0, 0.5);
+    color: #ffcc00;
+    font-size: 12px;
+    letter-spacing: 0.5px;
 }

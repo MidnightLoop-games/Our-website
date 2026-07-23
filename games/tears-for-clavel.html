@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tears For Clavel · Midnight Loop</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../Assets/Icono_Pagina.png" type="image/png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollToPlugin.min.js"></script>
+</head>
+<body>
+<!-- Navbar -->
+<nav id="navbar">
+    <div class="logo"><a href="../index.html" style="color:inherit;text-decoration:none;">MIDNIGHT LOOP</a></div>
+    <ul class="nav-links">
+        <li><a href="../index.html#inicio">Home</a></li>
+        <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-toggle">Games <span class="dropdown-arrow">&#9662;</span></button>
+            <ul class="nav-dropdown-menu">
+                <li><a href="tears-for-clavel.html">Tears For Clavel</a></li>
+                <li><a href="sereno.html">Sereno</a></li>
+            </ul>
+        </li>
+        <li><a href="../index.html#equipo">Team</a></li>
+        <li><a href="../index.html#contacto">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Game Hero -->
+<section class="game-hero" id="inicio">
+    <div class="game-hero-bg" style="background-image: url('../Assets/keyArt_TearsForClavel.png');"></div>
+    <div class="game-hero-content">
+        <span class="game-status-badge development">IN DEVELOPMENT</span>
+        <h1>Tears For Clavel</h1>
+        <p class="game-tagline">
+            AQUI HAY QUE PONER ALGO
+        </p>
+        <div class="game-cta-group">
+            <span class="btn-primary" style="opacity:0.6; cursor:default;">Not Available Yet</span>
+            <a href="../index.html" class="btn-secondary">← Back to Home</a>
+        </div>
+        <span class="editable-note">Todavía faltan datos por rellenar aquí :P</span>
+    </div>
+</section>
+
+<!-- About / Synopsis -->
+<section class="game-about" id="about">
+    <h2>The Story</h2>
+    <p>
+        Tears for Clavel is a singleplayer narrative murder mystery game where you play the same story from two different perspectives. As a night watchman during the dark and as a young mailman during the day, with a murder that ties everything together towards the end. It's set in a fictional 1940s post civil war Spain, with handrawn stylized art.
+    </p>
+</section>
+
+<!-- Features -->
+<section class="game-features">
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">✦</div>
+            <h3>HAY</h3>
+            <p>Lorem ipsum</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">✦</div>
+            <h3>QUE</h3>
+            <p>Lorem ipsum</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">✦</div>
+            <h3>PONER</h3>
+            <p>Lorem ipsum</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">✦</div>
+            <h3>ALGO</h3>
+            <p>Lorem ipsum</p>
+        </div>
+    </div>
+</section>
+
+<!-- Trailer (placeholder, sin vídeo real todavía) -->
+<section class="game-trailer-section" id="trailer">
+    <h2>Trailer</h2>
+    <div class="video-container" style="background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);">
+        <p style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#a0aec0; font-size:18px; text-align:center; padding:0 40px; box-sizing:border-box;">Trailer próximamente</p> <!--sustituir este bloque por un iframe de YouTube cuando esté disponible.-->
+    </div>
+</section>
+
+<!-- Gallery -->
+<section class="game-gallery-section" id="galeria">
+    <h2>Gallery</h2>
+    <div class="gallery-slider">
+        <div class="gallery-track" id="galleryTrack">
+            <div class="gallery-item"><img src="../Assets/keyArt_TearsForClavel.png" alt="Tears For Clavel key art"></div>
+        </div>
+        <div class="gallery-nav">
+            <button class="gallery-btn" onclick="moveGallery(-1)">‹</button>
+            <button class="gallery-btn" onclick="moveGallery(1)">›</button>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<section class="game-final-cta">
+    <h2>Stay tuned</h2>
+    <span class="editable-note">Aquí se puede poner un CTA para las wishlists</span>
+    <p>We are growing step by step, this project is important for all of us. If you want to support us then add us to your wishlist.</p>
+    <span class="btn-primary" style="opacity:0.6; cursor:default;">Coming Soon</span>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <p class="footer-left"><strong>Follow us online!</strong></p>
+
+        <div class="footer-center">
+            <div class="social-icons">
+                <a href="https://dreamy-alchemist.itch.io/sereno" target="_blank">
+                    <img src="https://img.icons8.com/ios11/600/FA5252/itch-io.png" alt="itch.io">
+                </a>
+                <a href="https://bsky.app/profile/midnightloop.bsky.social" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bluesky_Logo.svg/960px-Bluesky_Logo.svg.png" alt="Bluesky">
+                </a>
+                <a href="https://www.youtube.com/@MidnightLoop-Games" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+                </a>
+                <a href="https://www.reddit.com/user/Midnight_Loop/" target="_blank">
+                    <img src="https://vectorseek.com/wp-content/uploads/2023/12/Reddit-Icon-New-2023-Logo-Vector.svg-.png" alt="Reddit">
+                </a>
+                <a href="https://www.linkedin.com/company/midnight-loop" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png" alt="LinkedIn">
+                </a>
+            </div>
+            <p class="social-text">© 2026 Midnight Loop.</p>
+        </div>
+
+        <p class="footer-right"><a href="../index.html#newsletter"><strong>Join the midnight mailing list</strong></a></p>
+    </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sereno · Midnight Loop</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../Assets/Icono_Pagina.png" type="image/png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollToPlugin.min.js"></script>
+</head>
+<body>
+<!-- Navbar -->
+<nav id="navbar">
+    <div class="logo"><a href="../index.html" style="color:inherit;text-decoration:none;">MIDNIGHT LOOP</a></div>
+    <ul class="nav-links">
+        <li><a href="../index.html#inicio">Home</a></li>
+        <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-toggle">Games <span class="dropdown-arrow">&#9662;</span></button>
+            <ul class="nav-dropdown-menu">
+                <li><a href="tears-for-clavel.html">Tears For Clavel</a></li>
+                <li><a href="sereno.html">Sereno</a></li>
+            </ul>
+        </li>
+        <li><a href="../index.html#equipo">Team</a></li>
+        <li><a href="../index.html#contacto">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Game Hero -->
+<section class="game-hero" id="inicio">
+    <div class="game-hero-bg" style="background-image: url('../Assets/Portada_Sereno.jpg');"></div>
+    <div class="game-hero-content">
+        <span class="game-status-badge finished">FINISHED</span>
+        <h1>Sereno</h1>
+        <p class="game-tagline">A narrative time-loop investigation set in 1940s post-war Madrid. Live the same day again and again, until the truth finally surfaces.</p>
+        <div class="game-cta-group">
+            <a href="https://dreamy-alchemist.itch.io/sereno" target="_blank" class="btn-primary">Play it on itch.io →</a>
+            <a href="../index.html" class="btn-secondary">← Back to Home</a>
+        </div>
+    </div>
+</section>
+
+<!-- About / Synopsis -->
+<section class="game-about" id="about">
+    <h2>The Story</h2>
+    <p>Sereno was a gamejam prototype developed along 10 days that set the foundations for our current title, Tears for Clavel. It was a narrative time-loop investigation game set in a fictional Madrid, where players play as Sereno, a night watchman trying to uncover the reason behind a murder.</p>
+</section>
+
+<!-- Features -->
+<section class="game-features">
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔁</div>
+            <h3>Time-Loop Investigation</h3>
+            <p>Relive the same day over and over, using every loop to dig a little deeper into the mystery.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🏙️</div>
+            <h3>1940s Post-War Madrid</h3>
+            <p>Explore a hand-crafted, atmospheric recreation of a city still healing from war.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Trailer -->
+<section class="game-trailer-section" id="trailer">
+    <h2>Trailer</h2>
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/0XczhTgPNa8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</section>
+
+<!-- Gallery -->
+<section class="game-gallery-section" id="galeria">
+    <h2>Gallery</h2>
+    <div class="gallery-slider">
+        <div class="gallery-track" id="galleryTrack">
+            <div class="gallery-item"><img src="../Assets/Gallery/Imagen1.jpg" alt="Imagen 1"></div>
+            <div class="gallery-item"><img src="../Assets/Gallery/Imagen2.jpg" alt="Imagen 2"></div>
+            <div class="gallery-item"><img src="../Assets/Gallery/Imagen3.jpg" alt="Imagen 3"></div>
+            <div class="gallery-item"><img src="../Assets/Gallery/Imagen4.jpg" alt="Imagen 4"></div>
+        </div>
+        <div class="gallery-nav">
+            <button class="gallery-btn" onclick="moveGallery(-1)">‹</button>
+            <button class="gallery-btn" onclick="moveGallery(1)">›</button>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<section class="game-final-cta">
+    <h2>Don't miss the loop</h2>
+    <p>Play Sereno on itch.io and enjoy it.</p>
+    <a href="https://dreamy-alchemist.itch.io/sereno" target="_blank" class="btn-primary">PLAY IT ON ITCH.IO →</a>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <p class="footer-left"><strong>Follow us online!</strong></p>
+
+        <div class="footer-center">
+            <div class="social-icons">
+                <a href="https://dreamy-alchemist.itch.io/sereno" target="_blank">
+                    <img src="https://img.icons8.com/ios11/600/FA5252/itch-io.png" alt="itch.io">
+                </a>
+                <a href="https://bsky.app/profile/midnightloop.bsky.social" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bluesky_Logo.svg/960px-Bluesky_Logo.svg.png" alt="Bluesky">
+                </a>
+                <a href="https://www.youtube.com/@MidnightLoop-Games" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+                </a>
+                <a href="https://www.reddit.com/user/Midnight_Loop/" target="_blank">
+                    <img src="https://vectorseek.com/wp-content/uploads/2023/12/Reddit-Icon-New-2023-Logo-Vector.svg-.png" alt="Reddit">
+                </a>
+                <a href="https://www.linkedin.com/company/midnight-loop" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/960px-LinkedIn_logo_initials.png" alt="LinkedIn">
+                </a>
+            </div>
+            <p class="social-text">© 2026 Midnight Loop.</p>
+        </div>
+
+        <p class="footer-right"><a href="../index.html#newsletter"><strong>Join the midnight mailing list</strong></a></p>
+    </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>
