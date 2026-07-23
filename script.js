@@ -1,6 +1,42 @@
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
 
+// Navbar: mobile hamburger menu
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinksList = document.querySelector('.nav-links');
+
+function closeMobileMenu() {
+    if (!menuToggle || !navLinksList) return;
+    navLinksList.classList.remove('mobile-open');
+    menuToggle.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+}
+
+function closeAllDropdowns() {
+    document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+}
+
+if (menuToggle && navLinksList) {
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = navLinksList.classList.toggle('mobile-open');
+        menuToggle.classList.toggle('active', isOpen);
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        if (!isOpen) closeAllDropdowns();
+    });
+
+    // Tapping a direct link (Home / Team / Contact) closes the panel;
+    // the nested "Games" links keep it open since they navigate away anyway
+    navLinksList.querySelectorAll(':scope > li > a').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Reset to the desktop layout if the viewport grows past the breakpoint
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) closeMobileMenu();
+    });
+}
+
 // Navbar "Games" dropdown
 const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -56,11 +92,20 @@ document.addEventListener('click', (e) => {
     document.querySelectorAll('.nav-dropdown.open').forEach(d => {
         if (!d.contains(e.target)) d.classList.remove('open');
     });
+
+    if (
+        navLinksList && navLinksList.classList.contains('mobile-open') &&
+        !navLinksList.contains(e.target) &&
+        !(menuToggle && menuToggle.contains(e.target))
+    ) {
+        closeMobileMenu();
+    }
 });
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+        closeAllDropdowns();
+        closeMobileMenu();
     }
 });
 
