@@ -158,7 +158,8 @@ const projects = [
         description: "Tears for Clavel is a singleplayer narrative murder mystery game where you play the same story from two different perspectives. As a night watchman during the dark and as a young mailman during the day, with a murder that ties everything together towards the end. It's set in a fictional 1940s post civil war Spain, with handrawn stylized art.",
         layout: "left",
         website: "#newsletter",
-        linkText: "[WORK IN PROGRESS]"
+        linkText: "< IN DEVELOPMENT >",
+        pageUrl: "games/tears-for-clavel.html"
     },
     {
         title: "Sereno",
@@ -166,12 +167,34 @@ const projects = [
         video: "https://www.youtube.com/embed/0XczhTgPNa8",
         videoFile: "",
         image: "",
-        description: "Sereno is a narrative time-loop investigation game set in 1940s post-war Madrid, where players alternate between a watchman at night and a mailman during the day. Each loop represents a full day divided into four evolving stages, pushing players to explore the city, gather Items, develop Ideas, and build Instincts to uncover clues and reconstruct the truth behind a murder tied to both characters' pasts.",
+        description: "Sereno was a gamejam prototype developed along 10 days that set the foundations for our\n" +
+            "current title, Tears for Clavel. It was a narrative time-loop investigation game set in a fictional Madrid, where players play as Sereno, a night watchman trying to uncover the reason behind a murder.",
         layout: "right",
         website: "https://dreamy-alchemist.itch.io/sereno",
-        linkText: "ENJOY IT NOW →"
+        linkText: "ENJOY IT NOW →",
+        pageUrl: "games/sereno.html"
     }
 ];
+
+// Both project CTA buttons read their destination from data-href (set/updated
+// in animateProjectChange) instead of a real href, since they're <button>
+// elements now. Resolved at click time - not cached - so it always matches
+// whichever project is currently showing.
+function handleProjectCtaClick(e) {
+    const href = e.currentTarget.dataset.href;
+    if (!href) return;
+
+    if (href.startsWith('#')) {
+        const target = document.querySelector(href);
+        if (target) {
+            gsap.to(window, { duration: 1, scrollTo: target, ease: 'power3.inOut' });
+        }
+    } else if (/^https?:\/\//.test(href)) {
+        window.open(href, '_blank');
+    } else {
+        window.location.href = href;
+    }
+}
 
 // Shows the right media element (iframe / local video / image) for a project
 // inside its .video-container, hiding and resetting the other two so nothing
@@ -222,11 +245,13 @@ function animateProjectChange(direction) {
     isAnimatingProject = true;
 
     const container = document.querySelector('.project-container');
-    const linkElement = document.getElementById('project-link');
+    const primaryBtn = document.getElementById('project-link');
+    const secondaryBtn = document.getElementById('project-link-secondary');
+    const ctaButtons = [primaryBtn, secondaryBtn].filter(Boolean);
     const project = projects[currentProject];
 
-    // Animate the container and link
-    gsap.to([container, linkElement], {
+    // Animate the container and both CTA buttons together
+    gsap.to([container, ...ctaButtons], {
         x: direction * -100,
         opacity: 0,
         duration: 0.5,
@@ -238,20 +263,29 @@ function animateProjectChange(direction) {
             container.querySelector('h2').textContent = project.title;
             container.querySelector('p').textContent = project.description;
 
-            // Update project link
-            linkElement.href = project.website;
-            linkElement.textContent = project.linkText;
+            // Update the CTA buttons
+            if (primaryBtn) {
+                primaryBtn.textContent = project.linkText;
+                primaryBtn.dataset.href = project.website;
+            }
+            if (secondaryBtn) {
+                secondaryBtn.dataset.href = project.pageUrl;
+            }
 
             // Reset position
-            gsap.set([container, linkElement], { x: direction * 100 });
+            gsap.set([container, ...ctaButtons], { x: direction * 100 });
 
             // Animate in
-            gsap.to([container, linkElement], {
+            gsap.to([container, ...ctaButtons], {
                 x: 0,
                 opacity: 1,
                 duration: 0.5,
                 ease: 'power2.inOut',
                 onComplete: () => {
+                    // The fucking GSAP leaves an inline transform behind even at x:0,
+                    // this shit outranks the .project-website:hover CSS transform so I
+                    // clear it so the hover animation works again after switching.
+                    gsap.set(ctaButtons, { clearProps: 'transform' });
                     isAnimatingProject = false;
                 }
             });
@@ -271,12 +305,24 @@ function changeProject(direction) {
     animateProjectChange(direction);
 }
 
-// Initialize the first project's media and dots
+// Initialize the first project's media, dots and CTA buttons
 const initialProjectContainer = document.querySelector('.project-container');
 if (initialProjectContainer) {
     setProjectMedia(initialProjectContainer, projects[currentProject]);
 }
 updateProjectDots();
+
+const initialPrimaryBtn = document.getElementById('project-link');
+const initialSecondaryBtn = document.getElementById('project-link-secondary');
+if (initialPrimaryBtn) {
+    initialPrimaryBtn.textContent = projects[currentProject].linkText;
+    initialPrimaryBtn.dataset.href = projects[currentProject].website;
+    initialPrimaryBtn.addEventListener('click', handleProjectCtaClick);
+}
+if (initialSecondaryBtn) {
+    initialSecondaryBtn.dataset.href = projects[currentProject].pageUrl;
+    initialSecondaryBtn.addEventListener('click', handleProjectCtaClick);
+}
 
 // Gallery functionality
 let currentSlide = 0;
@@ -390,11 +436,10 @@ function handleContact(e) {
 }
 
 // Smooth scroll
-// Delegated on document and re-checked at click time (instead of binding once
-// on load) so links whose href changes dynamically — like #project-link in the
-// carousel, which swaps between an in-page anchor and an external URL — always
-// get the correct behaviour: smooth-scroll for "#..." targets, normal
-// navigation for everything else (external sites, other pages, etc.).
+// Any <a> whose href changes dynamically still gets the correct
+// behaviour: smooth-scroll for "#..." targets, normal navigation for
+// everything else. (The carousel's CTA buttons are <button> elements handled
+// separately by handleProjectCtaClick, since they have no href attribute.)
 document.addEventListener('click', function (e) {
     const anchor = e.target.closest('a[href]');
     if (!anchor) return;
